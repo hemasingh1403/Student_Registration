@@ -1,0 +1,136 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <title>Hello, world!</title>
+    <link rel='stylesheet' href="{% static 'css/index.css' %}">
+  <script>
+    function addvalue(){
+      let result="";
+      let checkboxes=document.getElementsByName("qualification");
+     for(var i=0;i<checkboxes.length;i++)
+     {
+      if(checkboxes[i].checked==true)
+      {
+        result+=checkboxes[i].value+",";
+
+      }
+     }
+     fr=result.substring(0,result.length-1);
+     res.value=fr;
+    }
+
+    function addgender(){
+      let result="";
+      let radioss=document.getElementsByName("gender");
+     for(var i=0;i<radioss.length;i++)
+     {
+      if(radioss[i].checked==true)
+      {
+        result+=radioss[i].value+",";
+      }
+     }
+     fr=result.substring(0,result.length-1);
+     ress.value=fr;
+    }
+  </script>
+  </head>
+  <body>
+    <div class="container-Fluid">
+      <span class="d-block p-2 bg-dark text-white" >SCHOOL PROJECT</span>
+      <div class="row mt-5">
+
+       <div class="col wrapper">
+         <form action="#" method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+          <div class="input-box">
+            <span class="d-block p-2 bg-dark text-white" >New Registration</span>
+          </div>
+          <div class="input-box">
+            <input type="text" name="name" placeholder="Enter your name">
+          </div>
+          <div class="input-box">
+            <input type="text" name="course" placeholder="Enter your course">
+          </div>
+          <div class="input-box">
+            <input type="text" name="age" placeholder="Enter your age" >
+          </div>
+          <div>
+            select gender:<br>
+            <input type="radio" name="gender" value="male" onclick="addgender()">male<br>
+            <input type="radio" name="gender" value="female" onclick="addgender()">female<br>
+            <input type="textbox" name="ress" id="ress" hidden>
+          </div><br>
+          <div>
+            select qualification : <br>
+            <input type="checkbox" name="qualification" id="qualification " value="10th" onclick="addvalue()">10th<br>
+            <input type="checkbox" name="qualification" id="qualification"  value="12th" onclick="addvalue()">12th<br>
+            <input type="checkbox" name="qualification" id="qualification"  value="ug" onclick="addvalue()">ug<br>
+            <input type="checkbox" name="qualification" id="qualification"  value="pg" onclick="addvalue()">pg<br>
+            <input type="checkbox" name="qualification" id="qualification"  value="diploma" onclick="addvalue()">diploma<br>
+            <input type="checkbox" name="qualification" id="qualification"  value="others" onclick="addvalue()">others<br>
+            <input type="textbox" name="res" id="res" hidden>
+          </div>
+          <div class="input-box">
+              <input type="file" name="imgs" >
+            </div>
+      
+          <div class="input-box button">
+            <input type="Submit" value="upload">
+          </div>
+      </form>
+      </div>
+
+      <div class="col-8 offset-1"> 
+        <table class="table">
+          <thead>
+              <th style="background-color:green; text-align:center;" colspan="9" center> STUDENT DETAILS</th>
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">NAME</th>
+              <th scope="col">COURSE</th>
+              <th scope="col">AGE</th>
+              <th scope="col">GENDER</th>
+              <th scope="col">QUALIFICATION</th>
+              <th scope="col">IMAGE</th>
+              <th scope="col">EDIT</th>
+              <th scope="col">DELETE</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for i in im %}
+            <tr>
+              <td>{{i.id}}</td>
+              <td>{{i.name}}</td>
+              <td>{{i.course}}</td>
+              <td>{{i.age}}</td>
+              <td>{{i.gender}}</td>
+              <td>{{i.qualification}}</td>
+              <td><img src="{{i.img.url}}" height='50' width='40'></td>
+              <td><a class="btn btn-outline-warning" href="{% url 'edit' i.id%}" role="button">EDIT</a></td>
+              <td><a class="btn btn-outline-danger" href="{% url 'delete' i.id%}" role="button">DELETE</a></td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+  </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  </body>
+</html>
+
+
+
+
+
+
+

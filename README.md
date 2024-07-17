@@ -1,7 +1,3 @@
-It looks like you're working on a Django application for managing student records. Here's a brief description you can use for GitHub to describe your project:
-
----
-
 ## Student Management System
 
 This Django-based web application allows users to manage student records, including adding new students, editing existing records, and deleting entries. Key features include:
